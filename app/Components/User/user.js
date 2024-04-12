@@ -35,9 +35,9 @@ export default function User({onSongClick,playing,song_playing_data,tracks,isFet
 
         </div>
         <div className="bg-slate-700 w-full h-full flex flex-col">
-        <h1 className="m-3 font-bold text-xl">My Playlists</h1>
-        <p className="m-3 text-sm">These are all the playlists that you have created:</p>
-        {!user ? <p className="m-3 text-sm">You need to login to view your playlists</p> :
+        <h1 className="m-3 font-bold text-xl">My Songs:</h1>
+        <p className="m-3 text-sm">These are all the Songs that you have saved:</p>
+        {!user ? <p className="m-3 text-sm">You need to login to view your Saved Songs:</p> :
         <>
         <div className='flex flex-row gap-5 p-2 overflow-scroll max-[700px]:gap-3 max-[400px]:gap-2'>
         {isFetching ? (

@@ -34,7 +34,7 @@ export default function Home({onSongClick,playing,tracks,artists,albums,song_pla
                         </div>
                         ) : (
                             artists.map((artist, index) => (
-                                <img key={index} alt={`${artist.name}'s Picture`} src={`${artist.picture_xl}`} className=" h-full w-40 mr-3 rounded-full object-cover aspect-square hover:scale-105 ease-in-out duration-300 active:scale-95 active:duration-100"/>
+                                <img key={index} alt={`${artist.name}'s Picture`} src={`${artist.picture_xl}`} className=" h-full w-40 mr-3 max-[500px]:w-24 rounded-full object-cover aspect-square hover:scale-105 ease-in-out duration-300 active:scale-95 active:duration-100"/>
                             ))
                         )}
                     </div>

@@ -104,12 +104,8 @@ export default function Page() {
             setPlaying(false);
         }
         else{
-            clearTimeout();
             setAudioSrc(data.preview);
             setPlaying(true);
-            setTimeout(() => {
-                setPlaying(false);
-              }, 30000);
         }
         setSongPlayingData(data);
     };
@@ -139,33 +135,35 @@ export default function Page() {
         console.log("Previous Song");
         audioRef.current.currentTime = 0;
     };
-
+    const handlePlay = () => {
+        setPlaying(!playing);
+    }
     return (
         <main className="bg-gray-300 flex flex-col h-screen w-screen">
             <div className="flex flex-col h-screen">
-                <div className={`flex flex-row h-[100px] w-screen max-[700px]:h-[70px] rounded-b-3xl overflow-hidden fixed ease-out duration-100 ${playervisible ? " translate-y-0" : "-translate-y-full"}`}>
-                    <audio ref={audioRef} src={`${audio_src}`} />
+                <div className={`flex flex-row h-[100px] w-screen rounded-b-3xl overflow-hidden fixed ease-out duration-100 ${playervisible ? " translate-y-0" : "-translate-y-full"}`}>
+                    <audio ref={audioRef} src={`${audio_src}`} loop/>
                     <div className=" overflow-hidden">
                       {playervisible && <img src={`${song_playing_data.album.cover_xl}`} className=" absolute h-full w-full -z-10 blur-lg brightness-50 object-cover"/>}
                     </div>
-                    <div className=" flex flex-row h-fit w-1/3 m-2 gap-3 p-1">
-                    {playervisible &&<> <img src={`${song_playing_data.album.cover_xl}`} className={` h-20 w-20 max-[700px]:h-10 max-[700px]:w-10 object-cover z-20 ease-in-out duration-300 rounded-full border-[1px] border-solid border-white ${playing ?"animate-spin":" animate-none"}`}/>
+                    <div className=" flex flex-row h-full w-1/3 m-2 gap-3 p-1 pb-5 max-[500px]:justify-center items-center">
+                    {playervisible &&<> <img src={`${song_playing_data.album.cover_xl}`} className={` h-20 w-20 max-[500px]:hidden max-[700px]:h-10 max-[700px]:w-10 object-cover z-20 ease-in-out duration-300 rounded-full border-[1px] border-solid border-white ${playing ?"animate-spin":" animate-none"}`}/>
                       <div className="flex flex-col w-fit items-center justify-center">
                         <h2 className="text-white text-2xl font-semibold max-[700px]:text-lg max-[500px]:text-sm text-center">{song_playing_data.title_short}</h2>
                         <h3 className="text-white text-lg font-light max-[700px]:text-sm max-[500px]:text-xs">By {song_playing_data.artist.name}</h3>
                       </div></>}
                     </div>
-                    <div className="flex flex-row h-full w-1/3 gap-0 justify-center items-center">
+                    <div className="flex flex-row h-full w-1/3 gap-0 justify-center items-center text-white">
                     <MdSkipPrevious className=" h-1/2 w-fit brightness-75 ease-in-out duration-100 cursor-pointer hover:brightness-100 active:scale-90" onClick={prevSong}/>
-                    <FaPlay className={` h-1/2 w-fit brightness-75 ease-in-out duration-100 cursor-pointer hover:brightness-100 ${playing ?" opacity-0":" opacity-100 "} translate-x-1/2 active:scale-90`} onClick={()=>{onSongClick(song_playing_data)}}/>
-                    <FaPause  className={` h-1/2 w-fit brightness-75 ease-in-out duration-100 cursor-pointer hover:brightness-100 ${!playing ?" opacity-0":" opacity-100"} -translate-x-1/2 active:scale-90`} onClick={()=>{onSongClick(song_playing_data)}}/>
+                    <FaPlay className={` h-1/2 w-fit brightness-75 ease-in-out duration-100 cursor-pointer hover:brightness-100 ${playing ?" opacity-0 -z-10":" opacity-100 "} translate-x-1/2 active:scale-90`} onClick={()=>{handlePlay()}}/>
+                    <FaPause  className={` h-1/2 w-fit brightness-75 ease-in-out duration-100 cursor-pointer hover:brightness-100 ${!playing ?" opacity-0 -z-10":" opacity-100"} -translate-x-1/2 active:scale-90`} onClick={()=>{handlePlay()}}/>
                     <MdSkipNext className=" h-1/2 w-fit brightness-75 ease-in-out duration-100 cursor-pointer hover:brightness-100 active:scale-90" onClick={nextSong}/>
                     </div>
                     <div className=" h-full w-1/3 flex flex-col justify-center items-end px-5">
-                    <FaSquareXmark className="h-1/3 w-fit ease-in-out duration-200 text-red-600 cursor-pointer hover:text-red-700" onClick={onPlayerClose}/>
+                    <FaSquareXmark className="h-1/3 w-fit ease-in-out duration-200 text-red-600 hover:brightness-110 cursor-pointer" onClick={onPlayerClose}/>
                     </div>
                  </div>
-          <div className={`flex flex-row max-[1000px]:flex-col h-full gap-4 p-3 ease-out duration-300 ${playervisible && "pt-[110px] max-[700px]:pt-[80px]"}`}>
+          <div className={`flex flex-row max-[1000px]:flex-col h-full gap-4 p-3 ease-out duration-300 ${playervisible && "pt-[110px]"}`}>
           <div className="flex w-1/5 max-[1000px]:w-full h-full max-[1000px]:h-fit">
               <Sidebar onViewSelect={onViewSelect} tracks={savedSongs} isFetching={isFetching1} onSongClick={onSongClick}/>
           </div>
