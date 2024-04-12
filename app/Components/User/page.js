@@ -1,10 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
-
-import React from "react";
-import Image from "next/image";
 import Song from "../song";
 import { useUserAuth } from "./_utils/auth-context";
-import { AuthContextProvider } from "./_utils/auth-context";
 export default function User({onSongClick,playing,song_playing_data,tracks,isFetching,savedSongs,handleAddItem}) {
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
     const handleGitHubSignIn = async () => {
@@ -16,7 +11,6 @@ export default function User({onSongClick,playing,song_playing_data,tracks,isFet
       };
 
     return (
-        <AuthContextProvider>
         <div className="flex flex-col gap-0 h-full rounded-lg text-white">
             {user ? 
             <div className="bg-slate-900 w-full h-3/5 flex items-center p-3">
@@ -63,7 +57,6 @@ export default function User({onSongClick,playing,song_playing_data,tracks,isFet
 }       
         </div>
         </div>
-        </AuthContextProvider>
     );
   }
   
