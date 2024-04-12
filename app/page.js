@@ -6,7 +6,7 @@ import { saveSong,getSavedSongs,deleteSong } from "./Components/User/_services/m
 import { useUserAuth } from "./Components/User/_utils/auth-context";
 import Home from "./Components/home";
 import Search from "./Components/search";
-import User from "./Components/User/page";
+import User from "./Components/User/user";
 import Sidebar from "./Components/sidebar";
 import { MdSkipPrevious } from "react-icons/md";
 import { MdSkipNext } from "react-icons/md";

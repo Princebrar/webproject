@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Song from "../song";
 import { useUserAuth } from "./_utils/auth-context";
 export default function User({onSongClick,playing,song_playing_data,tracks,isFetching,savedSongs,handleAddItem}) {
